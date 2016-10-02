@@ -1,0 +1,15 @@
+{
+  "name": "strangerlights",
+  "version": "1.0.0",
+  "description": "A nerd tribute",
+  "main": "streambot.js",
+  "dependencies": {},
+  "devDependencies": {
+    "twit": "^2.2.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
