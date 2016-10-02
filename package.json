@@ -5,6 +5,7 @@
   "main": "streambot.js",
   "dependencies": {},
   "devDependencies": {
+    "serialport": "^4.0.1",
     "twit": "^2.2.5"
   },
   "scripts": {
