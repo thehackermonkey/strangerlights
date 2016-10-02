@@ -1,4 +1,4 @@
-//require twit library, CSV(to append tweet inf to a csv) and moment(time formating)
+//twitter API and serialport
 var Twit = require('twit'),
     config = require('./config'),
     serial = require('serialport'),
@@ -31,9 +31,28 @@ stream.on('tweet', function (tweet) {
 				console.log('invalid char');
 			}
 		}
-		console.log(serialTweet);
 	};
+    checkTweet(tweetArray, alphabetArray)
 
-	checkTweet(tweetArray, alphabetArray)
+    var port = new serial('/dev/cu.usbmodem1421', {
+        baudRate: 250000
+    });
+
+    port.on('open', function() {
+        sendChars = setInterval(function(){
+            port.write(serialTweet[0], function(err) {
+                if (err) {
+                    return console.log('Error on write: ', err.message);
+                }
+                console.log(serialTweet[0]);
+                serialTweet.shift();
+            });
+        }, 2000)
+        //we need to ende this set interval when "serialTweet" is empty.
+    });
+
+    port.on('error', function(err) {
+      console.log('Error: ', err.message);
+    })
 
 });
