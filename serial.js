@@ -8,14 +8,17 @@ var port = new serial('/dev/cu.usbmodem1421', {
 
 port.on('open', function() {
     sendChars = setInterval(function(){
-    port.write(alphabetArray[0], function(err) {
-        if (err) {
-          return console.log('Error on write: ', err.message);
+        if (!alphabetArray.length) {
+            clearInterval(sendChars);
         }
-        console.log(alphabetArray[0]);
-        alphabetArray.shift();
-    });
-}, 2000)
+        port.write(alphabetArray[0], function(err) {
+            if (err) {
+              return console.log('Error on write: ', err.message);
+            }
+            console.log(alphabetArray[0]);
+            alphabetArray.shift();
+        });
+    }, 2000)
 });
 
 // open errors will be emitted as an error event
