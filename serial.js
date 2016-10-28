@@ -5,20 +5,20 @@ var serial = require('serialport'),
 var port = new serial('/dev/cu.usbmodem1421', {
     baudRate: 250000
 });
-
 port.on('open', function() {
     sendChars = setInterval(function(){
+
+        if (!alphabetArray.length) {
+            clearInterval(sendChars);
+        }
         port.write(alphabetArray[0], function(err) {
             if (err) {
-                return console.log('Error on write: ', err.message);
+              return console.log('Error on write: ', err.message);
             }
             console.log(alphabetArray[0]);
             alphabetArray.shift();
-            if(alphabetArray.length === 0){
-                clearInterval(sendChars)
-            }
         });
-    }, 2000);
+    }, 2000)
 });
 
 port.on('error', function(err) {
