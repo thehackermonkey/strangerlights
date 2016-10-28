@@ -2,7 +2,7 @@
 var Twit = require('twit'),
     config = require('./local_config'),
     serial = require('serialport'),
-	 alphabet = ' ABCDEFGHIJKLMNOPRSTUVWXY',
+	 alphabet = ' QRSTUVWXYZ',
     alphabetArray = alphabet.split(''),
     T = new Twit(config);
 
